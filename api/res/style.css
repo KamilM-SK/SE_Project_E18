@@ -73,7 +73,6 @@
 		color: #222;
 		float: right;
 		position: relative;
-    	display: inline-block;
 		line-height: 50px;
 		padding-right: 20px;
 		cursor: pointer;
@@ -134,6 +133,85 @@
 	
 	#account:hover .account__dropdown {
 		display: block;
+	}
+	
+	.user__notification {
+		float: right;
+		line-height: 50px;
+		padding:  0 10px;
+	}
+	
+	.user__dropdown {
+		right: 5px;
+		box-sizing: border-box;
+		padding: 5px;
+		display: none;
+		position: absolute;
+		width: 300px;
+		margin-top: -150px;
+		background: #fafafa;
+		border: 1px solid #e0e0e0;
+		min-width: inherit;
+		margin: auto;
+		z-index: 1;
+	}
+	
+	#user_arrow {
+		width: 0;
+		height: 0;
+		float: right;
+		margin-right: 115px;
+		margin-top: -12px;
+		border-left: 7px solid transparent;
+		border-right: 7px solid transparent;
+		border-bottom: 7px solid #e0e0e0;
+	}
+	
+	.user__notification:hover .user__dropdown {
+		display: block;
+	}
+	
+	.user__notification .small{
+		margin-bottom: 5px;
+		float: left;
+		width: 95%;
+	}
+	
+	.delete {
+		float: right;
+		size: 36px;
+		width: 5%;
+		position: relative;
+	}
+	
+	.delete a {
+		color: #FFF;
+	}
+	
+	.general_news {
+		font-size: 16px;
+		line-height: 20px;
+		width: 95%;
+		margin: auto;
+		background: #e6273f;
+		color: #FFF;
+		box-sizing: border-box;
+		padding: 10px;
+		border-radius: 5px;
+		margin-bottom: 10px;
+	}
+	
+	.article_news {
+		font-size: 16px;
+		line-height: 20px;
+		width: 95%;
+		margin: auto;
+		background: #333;
+		color: #FFF;
+		box-sizing: border-box;
+		padding: 10px;
+		border-radius: 5px;
+		margin-bottom: 10px;
 	}
 	
 	/*
@@ -237,6 +315,20 @@
 		font-size: 36px;
 	}
 	
+	.form-w-50-l {
+		width: 50%;
+		box-sizing: border-box;
+		padding-right: 10px;
+		float: left;
+	}
+	
+	.form-w-50-r {
+		width: 50%;
+		box-sizing: border-box;
+		padding-left: 10px;
+		float: right;
+	}
+	
 }
 
 @media only screen and (max-width: 1585px) and (min-width: 1200px) {
@@ -331,6 +423,15 @@
 		color: #222;
 		transition: 0.3s;
 		right: 5px;
+	}
+	
+	.user__dropdown {
+		width: 100%;
+		right: 0;
+	}
+	
+	#user_arrow {
+		margin-right: 95px;	
 	}
 	
 	nav {

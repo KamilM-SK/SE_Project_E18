@@ -10,6 +10,12 @@ class User {
 	private $firstName;
 	private $lastName;
 	private $userType;
+	private $dateOfBirth;
+	private $telephoneNumber;
+	private $emailPrivate;
+	private $studyArea;
+	private $avatar;
+	private $status;
 	private $db;
 	
 	function __construct($db) {
@@ -58,18 +64,26 @@ class User {
 		$this->firstName = $this->db->real_escape_string($_POST['first_name']);
 		$this->lastName = $this->db->real_escape_string($_POST['last_name']);
 		$this->email = $this->db->real_escape_string($_POST['email']);
+		$this->dateOfBirth = $this->db->real_escape_string($_POST['date_of_birth']);
+		$this->studyArea = $this->db->real_escape_string($_POST['study_area']);
 		$this->userType = $_POST['user_type'];
+		$this->status = 1;
 		
-		$this->salt = rand(1000000000, 9999999999);
-		$this->password = rand(1000000000, 9999999999);
+		$this->salt = rand(1000000000, 2147483647);
+		$this->password = rand(1000000000, 2147483647);
 		$emailPass = $this->password;
 		$this->password = sha1($this->password.$this->salt);
 		
-		$stmt = $this->db->prepare('INSERT INTO user(username, first_name, last_name, email, salt, password, user_type) VALUES(?, ?, ?, ?, ?, ?, ?)');
-		$stmt->bind_param("ssssisi", $this->username, $this->firstName, $this->lastName, $this->email, $this->salt, $this->password, $this->userType);
-		$stmt->execute();
+		$stmt = $this->db->prepare('INSERT INTO user(username, first_name, last_name, email, salt, password, date_of_birth, study_area, user_type, status) 
+		VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+		$stmt->bind_param("ssssisssii", $this->username, $this->firstName, $this->lastName, $this->email, 
+						  $this->salt, $this->password, $this->dateOfBirth, $this->studyArea, $this->userType, $this->status);
 		
-		$this->sendVerificationMailToANewMember($this->email, $this->username, $emailPass);
+		if ($stmt->execute()) {
+			$this->sendVerificationMailToANewMember($this->email, $this->username, $emailPass);
+			header('location: register.php?register_status=1000&username='.$this->username);
+		}
+		
 	}
 	
 	private function sendVerificationMailToANewMember($email, $username, $password) {
