@@ -1,15 +1,8 @@
-<?php
-
-include_once( '../classes/Notification.php' );
-include_once( '../api/Database.php' );
-$notification = new Notification( $conn )
-
-?>
 <!doctype html>
 <html>
 
 <head>
-	<base href="http://botticelliproject.com/stak/"/>
+	<base href="http://localhost/stak/"/>
 	<meta charset="utf-8">
 	<title>Stak</title>
 	<title>Stak - Login</title>
@@ -49,72 +42,6 @@ $notification = new Notification( $conn )
 				<a href="logout.php?logout=true&location=2"> Logout </a>
 
 			</div>
-
-		</div>
-		<div class="user__notification">
-
-			<?php 
-				
-					$numberOfNotification = $notification->countAllUnseenNotificationsForUser($_SESSION['user_id'], $conn);
-				
-				?>
-
-			<span class="badge badge-primary">
-				<?php echo($numberOfNotification) ?>
-			</span>
-
-			<div class="user__dropdown">
-				<div id="user_arrow"></div>
-				Notifications
-				<?php 
-				
-				if ($numberOfNotification > 0) {
-					$result = $notification->fetchAllUnseenNotificationsForUser($_SESSION['user_id'], $conn);
-					
-					while ($row = $result->fetch_assoc()) {
-						
-						switch ($row['notification_type']) {
-							case 1: {
-								?>
-
-				<div class="general_news">
-					<div class="small">
-						<?php echo $row['time'] ?>
-					</div>
-					<div class="delete"><a href="api/removenotification.php?id=<?php echo($row['ID']); ?>">×</a>
-					</div>
-					<?php echo $row['description'] ?>
-				</div>
-				<?php
-							break;
-							}
-							case 2: {
-								?>
-				
-					<div class="article_news">
-					<div class="small">
-						<?php echo $row['time'] ?>
-					</div>
-					<div class="delete"><a href="api/removenotification.php?id=<?php echo($row['ID']); ?>">×</a>
-					</div>
-					<?php echo $row['description'] ?>
-				</div>
-				<?php
-							break;
-							}
-				}
-
-				}
-				} else {
-					echo( 'There are no new notifications.' );
-				}
-
-
-				?>
-
-
-			</div>
-
 		</div>
 
 	</header>
