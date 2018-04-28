@@ -15,7 +15,6 @@ class User {
 	private $emailPrivate;
 	private $studyArea;
 	private $avatar;
-	private $status;
 	private $db;
 	
 	function __construct($db) {
@@ -67,22 +66,20 @@ class User {
 		$this->dateOfBirth = $this->db->real_escape_string($_POST['date_of_birth']);
 		$this->studyArea = $this->db->real_escape_string($_POST['study_area']);
 		$this->userType = $_POST['user_type'];
-		$this->status = 1;
 		
 		$this->salt = rand(1000000000, 2147483647);
 		$this->password = rand(1000000000, 2147483647);
 		$emailPass = $this->password;
 		$this->password = sha1($this->password.$this->salt);
 		
-		$stmt = $this->db->prepare('INSERT INTO user(username, first_name, last_name, email, salt, password, date_of_birth, study_area, user_type, status) 
-		VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
-		$stmt->bind_param("ssssisssii", $this->username, $this->firstName, $this->lastName, $this->email, 
-						  $this->salt, $this->password, $this->dateOfBirth, $this->studyArea, $this->userType, $this->status);
+		$stmt = $this->db->prepare('INSERT INTO user(username, first_name, last_name, email, salt, password, date_of_birth, study_area, user_type) 
+		VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)');
+		$stmt->bind_param("ssssisssi", $this->username, $this->firstName, $this->lastName, $this->email, 
+						  $this->salt, $this->password, $this->dateOfBirth, $this->studyArea, $this->userType);
+                $stmt->execute();
+                header('location: register.php?status=1000');
+		$this->sendVerificationMailToANewMember($this->email, $this->username, $emailPass);
 		
-		if ($stmt->execute()) {
-			$this->sendVerificationMailToANewMember($this->email, $this->username, $emailPass);
-			header('location: register.php?register_status=1000&username='.$this->username);
-		}
 		
 	}
 	
