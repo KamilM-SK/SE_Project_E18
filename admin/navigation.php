@@ -6,8 +6,11 @@
 
 	<div class="nav__headline"> Articles </div>
 	
-	<a href="admin/allarticles.php"> <div class="nav__link <?php if ($_SERVER["SCRIPT_NAME"] == '') echo('active'); ?>"> 
+	<a href=""> <div class="nav__link <?php if ($_SERVER["SCRIPT_NAME"] == '') echo('active'); ?>"> 
 			  All Articles  </div> </a>
+	
+	<a href="admin/suggestarticles.php"> <div class="nav__link <?php if ($_SERVER["SCRIPT_NAME"] == '') echo('active'); ?>"> 
+			  Suggest Articles  </div> </a>
 	
 	<div class="nav__headline"> Account </div>
 	
