@@ -12,7 +12,6 @@ $notification = new Notification( $conn )
 	<base href="http://botticelliproject.com/stak/"/>
 	<meta charset="utf-8">
 	<title>Stak</title>
-	<title>Stak - Login</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 
