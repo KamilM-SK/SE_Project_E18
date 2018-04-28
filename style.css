@@ -1,0 +1,344 @@
+@charset "utf-8";
+
+/* CSS Document */
+
+
+
+@media only screen {
+/*
+
+	*SECTION: HEADER
+
+	*All header styles explained here
+
+	*Main CSS tags: header, logo, sitelink, account
+
+	*/
+
+	
+
+a:focus, a:hover {
+	text-decoration: none;
+}
+header {
+	width: 100%;
+	height: 50px;
+	margin-bottom: 15px;
+	background: #fafafa;
+	position: fixed;
+	z-index: 2;
+	border-bottom: 1px solid #e0e0e0;
+}
+.logo {
+	font-size: 18px;
+	max-width: 80px;
+	padding-left: 15px;
+	line-height: 50px;
+	display: block;
+	float: left;
+	color: #000;
+}
+.logo img {
+	margin-top: -1px;
+	padding-right: 10px;
+	object-fit: cover;
+	width: 100%;
+}
+/*
+
+	*SUBSECTION: SITELINK
+
+	*Describes how main link that connect you to your
+
+	*main site reacts when it's displayed on a big screen
+
+	*and mobile screen
+
+	*/
+
+.sitelink {
+	line-height: 50px;
+	padding-left: 20px;
+	padding-right: 20px;
+	float: left;
+	display: block;
+}
+.sitelink__icon {
+	display: none;
+}
+.sitelink.active a {
+	color: #7a7a7a;
+}
+a #account {
+	color: #222;
+	text-decoration: none;
+}
+#account {
+	color: #222;
+	float: right;
+	position: relative;
+	display: inline-block;
+	line-height: 50px;
+	padding-right: 20px;
+	cursor: pointer;
+}
+#account__username {
+	float: left;
+	color: #222;
+	padding-right: 10px;
+}
+#account__avatar {
+	width: 30px;
+	height: 30px;
+	border-radius: 30px;
+	background: #E0E0E0 url(src/avatar_icon.png);
+	background-size: cover;
+	margin-top: 10px;
+	float: right;
+}
+.account__dropdown {
+	display: none;
+	position: absolute;
+	right: 20px;
+	background: #E0E0E0;
+	min-width: inherit;
+	margin: auto;
+	margin-top: 50px;
+	z-index: 1;
+}
+#account_arrow {
+	width: 0;
+	height: 0;
+	float: right;
+	margin-right: 8px;
+	margin-top: -7px;
+	border-left: 7px solid transparent;
+	border-right: 7px solid transparent;
+	border-bottom: 7px solid #E0E0E0;
+}
+.account__dropdown a {
+	color: #5D5D5D;
+	text-align: center;
+	font-size: 14px;
+	text-decoration: none;
+	line-height: 40px;
+	min-width: 120px;
+	display: block;
+}
+.account__dropdown a:hover {
+	color: #222;
+	transition: 0.3s;
+}
+#account:hover .account__dropdown {
+	display: block;
+}
+/*
+
+	*SECTION: NAVIGATION
+
+	*/
+
+
+
+
+
+nav {
+	padding-top: 75px;
+	position: fixed;
+	width: 14%;
+	background: #fafafa;
+	height: 100%;
+	float: left;
+	z-index: 1;
+	border-right: 1px solid #e0e0e0;
+	overflow-y: auto;
+}
+#nav__closebutton {
+	display: none;
+}
+.nav__headline {
+	color: #5A5A5A;
+	font-size: 14px;
+	text-transform: uppercase;
+	padding: 15px 20px 10px 20px;
+}
+.nav__link {
+	padding: 10px 5px 10px 5px;
+	font-size: 16px;
+	margin: 0px 10px;
+	border-radius: 5px;
+	color: #757575;
+}
+.active {
+	background: #efefef;
+	color: #333;
+}
+.nav__link:hover {
+	background: #efefef;
+	transition: 0.2s;
+}
+a.nav__link {
+	color: #5A5A5A;
+	font-size: 20px;
+	font-weight: 400;
+	line-height: 25px;
+	padding-left: 10px;
+	text-decoration: none;
+	padding-right: 20px;
+}
+a.nav__link:first-child {
+	display: none;
+}
+/*
+
+	*SECTION: MAIN
+
+	*
+
+	*/
+
+	
+
+main {
+	box-sizing: border-box;
+	padding: 10px;
+	margin-left: 14%;
+	margin-top: 50px;
+	width: 86%;
+	position: absolute;
+}
+footer {
+	margin-left: 14%;
+	width: 86%;
+	position: absolute;
+	margin-bottom: 0;
+}
+.crud {
+	position: fixed;
+	left: 14%;
+	bottom: 0px;
+	width: 86%;
+	background: #fafafa;
+	border-top: 1px solid #e0e0e0;
+	box-sizing: border-box;
+	padding: 10px;
+}
+#bottom-rule {
+	width: 100%;
+	height: 60px;
+}
+.display-4 {
+	font-size: 36px;
+}
+	
+	/**08042018-nt**/
+	.tab-pane {
+		background: none;
+	}
+	
+	/**08042018-nt**/
+	.nav-link{
+		color: #5A5A5A;
+	}
+
+@media only screen and (max-width: 1585px) and (min-width: 1200px) {
+.logo {
+	font-size: 16px;
+	width: 20%;
+}
+nav {
+	display: block;
+	width: 20%;
+}
+.nav__headline {
+	padding-right: 20px;
+}
+.signin {
+	width: 40%;
+}
+main {
+	margin-left: 20%;
+	width: 80%;
+}
+}
+
+@media only screen and (max-width: 1024px) {
+.logo {
+	font-size: 16px;
+	width: 20%;
+}
+nav {
+	display: block;
+	width: 30%;
+}
+.nav__headline {
+	padding-right: 20px;
+}
+.signin {
+	width: 40%;
+}
+main, footer {
+	margin-left: 30%;
+	width: 70%;
+}
+}
+
+@media only screen and (max-width: 736px) {
+.logo {
+	display: none;
+}
+.sitelink {
+	padding: 0 15px;
+	font-size: 14px;
+}
+.sitelink__icon {
+	display: block;
+	float: left;
+	line-height: 50px;
+	font-size: 18px;
+	padding-left: 20px;
+	cursor: pointer;
+}
+.sitelink__icon a {
+	color: #222;
+	text-decoration: none;
+}
+#sitelink__button {
+	display: none;
+}
+#account {
+	font-size: 14px;
+	padding-right: 5px;
+}
+.account__dropdown {
+	color: #222;
+	transition: 0.3s;
+	right: 5px;
+}
+nav {
+	height: auto;
+	position: relative;
+	display: none;
+	width: 100%;
+	overflow-y: auto;
+	transition: 2s;
+}
+#nav__closebutton {
+	display: block;
+	padding-left: 10px;
+	font-size: 24px;
+	cursor: pointer;
+}
+#nav__closebutton a {
+	color: #222;
+	text-decoration: none;
+}
+.nav__headline {
+	font-size: 14px;
+}
+main, footer {
+	margin-left: 0;
+	width: 100%;
+	z-index: 0;
+}
+}
