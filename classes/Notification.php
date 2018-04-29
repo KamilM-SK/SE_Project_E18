@@ -21,6 +21,14 @@ class Notification {
 		if (isset($_GET['notifyaboutsuggestedarticle']) && $_GET['notifyaboutsuggestedarticle'] == 'true' && isset($_GET['user'])) {
 			$this->sendNotificationToEditorAboutNewSuggestion();
 		}
+		
+		if (isset($_GET['token']) && isset($_GET['notification'])) {
+			if (isset($_GET['article'])) {
+				if (isset($_GET['members'])) {
+					$this->sendNotificationToAllMembersAboutApprovedArticle();
+				}
+			}
+		}
 	}
 	
 	private function sendNotificationToAllMembersAboutRegisteredUser($username) {
@@ -74,6 +82,33 @@ class Notification {
 		}
 	}
 	
+	private function sendNotificationToAllMembersAboutApprovedArticle() {
+		$sql = 'SELECT title FROM article WHERE ID = '.$_GET['article'];
+		$result = $this->db->query($sql);
+		$result = $result->fetch_assoc();
+		$articleTitle = $result['title'];
+
+		$this->description = 'Article titled: '.$articleTitle.' has been approved and ready to pick for writing.';
+
+		$this->notificationType = 2;
+
+		$sql = 'SELECT ID FROM user WHERE user_type != 1';
+		$result = $this->db->query($sql);
+		
+		$done = 0;
+		
+		while ($row = $result->fetch_assoc()) {
+			$this->reciever = $row['ID'];
+			$stmt = $this->db->prepare("INSERT INTO notification ( description, notification_type, reciever) VALUES(?, ?, ?)");
+			$stmt->bind_param("sii", $this->description, $this->notificationType, $this->reciever);
+			if ($stmt->execute()) {
+				$done = 1;
+			}
+		}
+
+		header('location: suggestarticles.php?status=1002');
+	}
+	
 	public function countAllUnseenNotificationsForUser($reciever, $db) {
 		$this->reciever = $reciever;
 		$this->db = $db;
@@ -90,6 +125,28 @@ class Notification {
 		$sql = 'SELECT * FROM notification WHERE reciever = '.$reciever.' AND seen IS NULL';
 		$result = $this->db->query($sql);
 		return $result;
+	}
+	
+	public function sendNotificationToMemberAboutDeclinedArticle($article, $reciever, $db){
+		$this->article = $article;
+		$this->reciever = $reciever;
+		$this->db = $db;
+		
+		$sql = 'SELECT title FROM article WHERE ID = '.$this->article;
+		$result = $this->db->query($sql);
+		$result = $result->fetch_assoc();
+		$articleTitle = $result['title'];
+		
+		$this->description = 'Article titled: '.$articleTitle.' has been declined.';
+		
+		$this->notificationType = 2;
+		
+		
+		$stmt = $this->db->prepare("INSERT INTO notification ( description, notification_type, reciever) VALUES(?, ?, ?)");
+		$stmt->bind_param("sii", $this->description, $this->notificationType, $this->reciever);
+		if ($stmt->execute()) {
+				header('location: decline.php?id='.$this->article);
+		}
 	}
 	
 }
