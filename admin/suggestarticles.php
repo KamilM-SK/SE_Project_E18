@@ -1,15 +1,15 @@
 <?php
 
-session_start();
+include_once( 'sessioncheck.php' );
 
 include_once( '../api/Database.php' );
 include_once( '../classes/Article.php' );
 include_once( '../classes/UserByArticle.php' );
 include_once( '../classes/Notification.php' );
 
-$article = new Article($conn);
-$userByArticle = new UserByArticle($conn);
-$notification = new Notification($conn);
+$article = new Article( $conn );
+$userByArticle = new UserByArticle( $conn );
+$notification = new Notification( $conn );
 
 include( 'header.php' )
 
@@ -36,12 +36,12 @@ include( 'header.php' )
 		if ( $_GET[ 'status' ] == 999 ) {
 
 			?>
-		
+
 		<div class="alert alert-danger alert-dismissible">
 			<button type="button" class="close" data-dismiss="alert">&times;</button>
 			<strong>Fail!</strong> Title already exists.
 		</div>
-		
+
 		<?php
 		}
 
@@ -52,6 +52,8 @@ include( 'header.php' )
 		<h1 class="display-4">Suggested Articles <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#myModal">
     New Suggestion
   </button></h1>
+		
+		<br>
 
 		<div class="modal fade" id="myModal">
 			<div class="modal-dialog modal-lg">
@@ -103,6 +105,45 @@ include( 'header.php' )
 				</div>
 			</div>
 		</div>
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Article title</th>
+					<th>Suggested by</th>
+					<th>Section</th>
+					<th>Description</th>
+					<th>Number of Pages</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				
+				<?php 
+					
+					$suggestedArticleList = $userByArticle->fetchAllSuggestedArticles($conn);
+					
+					while ($list = $suggestedArticleList->fetch_assoc()) {
+						echo '<tr>';
+						echo '<td>'.$list['title'].'</td>';
+						echo '<td>'.$list['first_name'].' '.$list['last_name'].'</td>';
+						echo '<td>'.$list['section'].'</td>';
+						echo '<td>'.$list['description'].'</td>';
+						echo '<td>'.$list['page_number'].'</td>';
+						echo '<td>';
+						echo '<a href="api/article/approve.php?id='.$list['article_ID'].'" role="button" class="btn btn-primary btn-sm">Approve</a> ';
+						echo '<a href="admin/modifysuggestedarticle.php?id='.$list['article_ID'].'" role="button" class="btn btn-primary btn-sm">Modify</a> ';
+						echo '<a href="api/article/decline.php?id='.$list['article_ID'].
+							 '&user='.$list['user_ID'].'&token='.$list['user_by_article'].
+							 '" role="button" class="btn btn-danger btn-sm">Decline</a> ';
+						echo '</td>';
+						echo '</tr>';
+					}
+				
+				?>
+
+				</tbody>
+			</table>
 
 	</div>
 

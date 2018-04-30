@@ -94,6 +94,12 @@ class User {
 		mail($this->email, 'ACCESS DATA', $email);
 	}
 	
+	public function fetchAllJournalists($db) {
+		$this->db = $db;
+		$sql = 'SELECT ID, username, first_name, last_name FROM user WHERE user_type = 3';
+		return $this->db->query($sql);
+	}
+	
 }
 
 ?>

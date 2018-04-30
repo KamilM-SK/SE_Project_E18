@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+include_once( 'sessioncheck.php' );
 
 if ( $_SESSION[ 'user_type' ] != 1 ) {
 	header( 'location: 403.php' );
