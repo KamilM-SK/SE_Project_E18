@@ -1,5 +1,6 @@
 <?php
 
+<<<<<<< HEAD
 include_once( '../api/Database.php' );
 include_once( '../classes/Notification.php' );
 include_once( '../classes/Magazine.php' );
@@ -8,6 +9,11 @@ $notification = new Notification( $conn );
 $magazine = new Magazine( $conn );
 
 $lastMagazineID = $magazine->getLastMagazineID($conn);
+=======
+include_once( '../classes/Notification.php' );
+include_once( '../api/Database.php' );
+$notification = new Notification( $conn )
+>>>>>>> ddfa8218943ceff305492005839affb1a310cb2b
 
 ?>
 <!doctype html>
@@ -73,9 +79,15 @@ $lastMagazineID = $magazine->getLastMagazineID($conn);
 				<?php 
 				
 				if ($numberOfNotification > 0) {
+<<<<<<< HEAD
 					$notificationResult = $notification->fetchAllUnseenNotificationsForUser($_SESSION['user_id'], $conn);
 					
 					while ($row = $notificationResult->fetch_assoc()) {
+=======
+					$result = $notification->fetchAllUnseenNotificationsForUser($_SESSION['user_id'], $conn);
+					
+					while ($row = $result->fetch_assoc()) {
+>>>>>>> ddfa8218943ceff305492005839affb1a310cb2b
 						
 						switch ($row['notification_type']) {
 							case 1: {
@@ -109,7 +121,10 @@ $lastMagazineID = $magazine->getLastMagazineID($conn);
 				}
 
 				}
+<<<<<<< HEAD
 					
+=======
+>>>>>>> ddfa8218943ceff305492005839affb1a310cb2b
 				} else {
 					echo( 'There are no new notifications.' );
 				}

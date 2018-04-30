@@ -94,12 +94,15 @@ class User {
 		mail($this->email, 'ACCESS DATA', $email);
 	}
 	
+<<<<<<< HEAD
 	public function fetchAllJournalists($db) {
 		$this->db = $db;
 		$sql = 'SELECT ID, username, first_name, last_name FROM user WHERE user_type = 3';
 		return $this->db->query($sql);
 	}
 	
+=======
+>>>>>>> ddfa8218943ceff305492005839affb1a310cb2b
 }
 
 ?>

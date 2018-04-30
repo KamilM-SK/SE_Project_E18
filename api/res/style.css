@@ -329,6 +329,7 @@
 		float: right;
 	}
 	
+<<<<<<< HEAD
 	.tab-pane {
 		background: none;
 	}
@@ -389,6 +390,8 @@
 		transition: 0.5s;
 	}
 	
+=======
+>>>>>>> ddfa8218943ceff305492005839affb1a310cb2b
 }
 
 @media only screen and (max-width: 1585px) and (min-width: 1200px) {
