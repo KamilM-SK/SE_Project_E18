@@ -1,3 +1,4 @@
+error code
 <?php
 session_start();
 require( 'api/Database.php' );
