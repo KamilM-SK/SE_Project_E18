@@ -5,11 +5,11 @@ include_once( 'sessioncheck.php' );
 include_once( '../api/Database.php' );
 include_once( '../classes/Article.php' );
 include_once( '../classes/UserByArticle.php' );
-include_once( '../classes/Notification.php' );
+
 
 $article = new Article( $conn );
 $userByArticle = new UserByArticle( $conn );
-$notification = new Notification( $conn );
+
 
 include( 'header.php' )
 

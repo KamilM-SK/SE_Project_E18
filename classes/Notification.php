@@ -29,6 +29,8 @@ class Notification {
 				}
 			}
 		}
+		
+	
 	}
 	
 	private function sendNotificationToAllMembersAboutRegisteredUser($username) {
@@ -108,6 +110,15 @@ class Notification {
 
 		header('location: suggestarticles.php?status=1002');
 	}
+	
+	
+	public function deleteNotification($ID, $db) {
+		$this->db = $db;
+		$this->ID = $ID;
+		
+		$sql = 'DELETE FROM notification WHERE ID = '.$this->ID;
+		$this->db->query($sql);
+	}	
 	
 	public function countAllUnseenNotificationsForUser($reciever, $db) {
 		$this->reciever = $reciever;

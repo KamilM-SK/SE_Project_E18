@@ -10,4 +10,9 @@ if (isset($_POST['select_articles_for_writing'])) {
 	$test = $article->updateArticleSetItForWriting($_GET['user'], $conn);
 }
 
+if (isset($_POST['select_articles_for_design'])) {
+	$article = new Article($conn);
+	$test = $article->updateArticleSetItForDesigning($_GET['user'], $conn);
+}
+
 ?>

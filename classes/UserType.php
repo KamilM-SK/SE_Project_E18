@@ -15,7 +15,7 @@ class UserType {
 	
 	public function getAllRoles($db) {
 		$this->db = $db;
-		$sql = 'SELECT * FROM user_type WHERE ID > 1';
+		$sql = 'SELECT * FROM user_type WHERE ID > 1 AND ID < 6';
 		return $this->db->query($sql);
 	}
 	
